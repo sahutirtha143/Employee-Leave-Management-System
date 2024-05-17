@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	<%@page import="ELM.java.Model.*" %>
-		<%
+
+<%@page import="ELM.java.Model.*"%>
+<%
 Users auth = (Users) request.getSession().getAttribute("auth");
 if (auth != null) {
 	request.setAttribute("auth", auth);
@@ -13,24 +13,25 @@ if (auth != null) {
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <!-- Font Icon -->
+<!-- Font Icon -->
 <link rel="stylesheet"
-	href="fonts/material-icon/css/material-design-iconic-font.min.css"> 
+	href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
- <!-- Main css -->
-<link rel="stylesheet" href="css/style.css"> 
+<!-- Main css -->
+<link rel="stylesheet" href="css/style.css">
 
 <!-- <link rel="stylesheet" href="includes/style.css"> -->
 
-<%@include file="includes/header.jsp" %>
+<%@include file="includes/header.jsp"%>
 
 </head>
 <body style="width: 100%;">
 	<%@include file="includes/navbar.jsp"%>
 
 
-<section class="rev_slider_wrapper thm-banner-wrapper" id="home" >
-		<div id="slider1" class="rev_slider" data-version="5.0" style="min-height: 80vh;">
+	<section class="rev_slider_wrapper thm-banner-wrapper" id="home" style="height: 70vh; background-position: center;">
+		<div id="slider1" class="rev_slider" data-version="5.0"
+			style="min-height: 80vh;">
 			<ul>
 				<li data-transition="parallaxvertical" data-ease="SlowMo.ease">
 					<img src="images/home/home10.png" alt="Crop Background">
@@ -82,7 +83,7 @@ if (auth != null) {
 				</li>
 			</ul>
 		</div>
-		
+	</section>
 
 
 
@@ -132,133 +133,18 @@ if (auth != null) {
 		</div>
 	</section>
 
-	<!-- <section class="welcome-services home-one">
-		<div class="thm-container">
-			<div class="sec-title">
-				<h2><span>Features</span></h2>
-				<p>All the features that are provided by this website.</p>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="welcome-single-services">
-						<div class="img-box">
-							<img src="images/welcome-services/18.jpg" alt="weather">
-						</div>
-						<div class="text-box">
-							<div class="content">
-								<h3>Weather Report</h3>
-								<p>Get all information needed on the weather of your current location or by searching
-									for the location.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="welcome-single-services">
-						<div class="img-box">
-							<img src="images/welcome-services/2.jpg" alt="seed">
-						</div>
-						<div class="text-box">
-							<div class="content">
-								<h3>Seed Price & Info</h3>
-								<p>Realtime Seed Price along with all the Knowledge you need about different types of
-									seeds</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="welcome-single-services">
-						<div class="img-box">
-							<img src="images/welcome-services/19.png" alt="Govt Schemes">
-						</div>
-						<div class="text-box">
-							<div class="content">
-								<h3>Goverment Schemes</h3>
-								<p>Latest Government Schemes for maximizing the benefits and minimizing the loss.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="welcome-single-services">
-						<div class="img-box">
-							<img src="images/welcome-services/3.jpg" alt="Tech">
-						</div>
-						<div class="text-box">
-							<div class="content">
-								<h3>Technological Knowledge</h3>
-								<p>The knowledge you need to enhance your crop production: Solar Panel, etc.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="welcome-single-services">
-						<div class="img-box">
-							<img src="images/welcome-services/5.jpg" alt="Internet">
-						</div>
-						<div class="text-box">
-							<div class="content">
-								<h3>Low Internet Consumption</h3>
-								<p>Even with poor internet connectivity, you can access this website.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="welcome-single-services">
-						<div class="img-box">
-							<img src="images/welcome-services/7.jpg" alt="Ui Ux">
-						</div>
-						<div class="text-box">
-							<div class="content">
-								<h3>Easy to Use</h3>
-								<p>Simple visuals are used making it easy to understand.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-	<footer id="footer" class="sec-padding">
-		<div class="thm-container">
-			<div class="row">
-				<div class="col-md-4 col-sm-6 footer-widget">
-					<div class="about-widget">
-						<a href="index.html"><img style="height: 150px;" src="images/footer-logo.png" alt="logo" /></a>
-						<p>All You Need for Agronomy</p>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6 footer-widget">
-					<div class="pl-30">
-						<div class="title" style="color: #05f7c2;">
-							<h2><span>"If the farmer is rich, then so is the nation."</span></h2>
-							<br>
-							<p><strong>- Amit Kalantri</strong></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-6 footer-widget">
-				</div>
-			</div>
-		</div>
-	</footer> -->
-
 	<div id="footerr"
-		style="background-color: black; width: 100%; height:16vh;">
-		<div style="width: 90%; margin: auto auto; display:flex; justify-content: space-between; padding-top: 5vh;">
+		style="background-color: black; width: 100%; height: 16vh;">
+		<div
+			style="width: 90%; margin: auto auto; display: flex; justify-content: space-between; padding-top: 5vh;">
 			<p style="font-size: 15px;">ELM: Employee Leave Management</p>
 			<p style="font-size: 15px;">Created By: Tirtha Sahu</p>
-			</div>
 		</div>
+	</div>
 
 
-	
-	
-<%@include file="includes/footer.jsp" %>
+
+
+	<%@include file="includes/footer.jsp"%>
 </body>
 </html>

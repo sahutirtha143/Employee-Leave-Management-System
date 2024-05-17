@@ -33,13 +33,20 @@ if (auth != null) {
 
 			<!-- SWEET ALERT CSS CDN -->
 			<link rel="stylesheet" href="alert/dist/sweetalert.css">
-				<style>
-#content_panel form label>span {
-	width: 130px;
+<style>
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0;
+	overflow: hidden; /* Prevent scrolling of the body */
 }
 
-#content_panel form input[type="submit"] {
-	margin-left: 195px;
+#container {
+	display: flex;
+	flex: 1;
+	height: 100%; /* Take full height of the viewport */
+	width: 100%;
 }
 
 .sidePanel li a {
@@ -49,8 +56,44 @@ if (auth != null) {
 	padding: 2rem 2rem;;
 }
 
+#side_bar {
+	width: 20vw;
+	background-color: #c0c0c0;
+	position: fixed;
+	height: 100%; /* Full height of the viewport */
+	overflow: auto;
+}
 
+#content_panel {
+	margin-left: 20vw; /* Same as the width of the sidebar */
+	width: 80vw;
+	height: calc(100vh - 16vh); /* Adjust for the footer height */
+	overflow-y: auto;
+	padding-bottom: 5vh; /* Ensure content doesn't overlap footer */
+}
 
+#footer {
+	background-color: black;
+	width: 100%;
+	height: 16vh;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#footer div {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 5vh;
+}
+
+#footer p {
+	font-size: 15px;
+	color: white;
+}
 .form-group {
 	padding-right: 2rem;
 }
@@ -63,10 +106,9 @@ if (auth != null) {
 <input type="hidden" id="status"
 		value="<%=request.getAttribute("status")%>">
 
-	<div id="container" style="height: 70vh; width: 100%; display: flex;">
-		<div id="side_bar"
-			style="width: 20vw; height: 70vh; background-color: #c0c0c0;">
-			<ul class="sidePanel">
+	<div id="container">
+        <div id="side_bar">
+            <ul class="sidePanel">
 				<li class="menu_head"
 					style="font-size: 30px; margin: 2rem 0; font-weight: 900; padding-left: 2rem;">Controls</li>
 				<li><a href="#">Dashboard</a></li>
@@ -176,13 +218,12 @@ if (auth != null) {
 
 	</div>
 	</div>
-	<div id="footer"
-		style="background-color: black; width: 100%; height:16vh;">
-		<div style="width: 90%; margin: auto auto; display:flex; justify-content: space-between; padding-top: 5vh;">
-			<p style="font-size: 15px;">ELM: Employee Leave Management</p>
-			<p style="font-size: 15px;">Created By: Tirtha Sahu</p>
-			</div>
+	<div id="footer">
+		<div>
+			<p>ELM: Employee Leave Management</p>
+			<p>Created By: Tirtha Sahu</p>
 		</div>
+	</div>
 
 	<%@include file="includes/footer.jsp"%>
 	<script

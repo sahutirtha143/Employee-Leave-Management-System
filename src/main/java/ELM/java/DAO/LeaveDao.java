@@ -213,5 +213,31 @@ public class LeaveDao {
         return leaves;
     }
 
+    
+    public List<ApplyLeave> getAllApprovedLeaves() {
+        List<ApplyLeave> leaves = new ArrayList<>();
+        query = "SELECT * FROM apply_leaves WHERE status = 'Approved'";
+        
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                ApplyLeave leave = new ApplyLeave();
+                leave.setL_id(rs.getInt("l_id"));
+                leave.setId(rs.getInt("u_id"));
+                leave.setStartDate(rs.getDate("start_date"));
+                leave.setEndDate(rs.getDate("end_date"));
+                leave.setType(rs.getString("type_of_leave"));
+                leave.setReason(rs.getString("reason"));
+                leave.setStatus(rs.getString("status"));
+                
+                leaves.add(leave);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return leaves;
+    }
 
 }

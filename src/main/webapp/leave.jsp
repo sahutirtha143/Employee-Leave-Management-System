@@ -42,12 +42,19 @@ ApplyLeave leave = new ApplyLeave();
 <!-- SWEET ALERT CSS CDN -->
 <link rel="stylesheet" href="alert/dist/sweetalert.css">
 <style>
-#content_panel form label>span {
-	width: 130px;
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0;
+	overflow: hidden; /* Prevent scrolling of the body */
 }
 
-#content_panel form input[type="submit"] {
-	margin-left: 195px;
+#container {
+	display: flex;
+	flex: 1;
+	height: 100%; /* Take full height of the viewport */
+	width: 100%;
 }
 
 .sidePanel li a {
@@ -55,6 +62,45 @@ ApplyLeave leave = new ApplyLeave();
 	font-size: 20px;
 	font-weight: 700;
 	padding: 2rem 2rem;;
+}
+
+#side_bar {
+	width: 20vw;
+	background-color: #c0c0c0;
+	position: fixed;
+	height: 100%; /* Full height of the viewport */
+	overflow: auto;
+}
+
+#content_panel {
+	margin-left: 20vw; /* Same as the width of the sidebar */
+	width: 80vw;
+	height: calc(100vh - 16vh); /* Adjust for the footer height */
+	overflow-y: auto;
+	padding-bottom: 5vh; /* Ensure content doesn't overlap footer */
+}
+
+#footer {
+	background-color: black;
+	width: 100%;
+	height: 16vh;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#footer div {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 5vh;
+}
+
+#footer p {
+	font-size: 15px;
+	color: white;
 }
 </style>
 <link rel="stylesheet" href="includes/style.css">
@@ -77,7 +123,7 @@ ApplyLeave leave = new ApplyLeave();
 				<li><a href="#">Apply Leave</a></li>
 				<li><a href="viewLeave.jsp">View Leave History</a></li>
 				<li><a href="emp_BalanceLeave.jsp">View Balance Leave</a></li>
-				<li><a href="calander.jsp">Calender</a></li>	
+				<li><a href="LeaveCalendar.jsp">Calender</a></li>	
 			</ul>
 		</div>
 

@@ -23,23 +23,32 @@ if (auth != null) {
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-	<!-- Font Icon -->
-<link rel="stylesheet"
-	href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
-<!-- Main css -->
-<link rel="stylesheet" href="css/style.css">
 
 <!-- CSS Bootstrap Link for the User table -->
 <link rel='stylesheet'
 	href='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+
+	<!-- Font Icon -->
+	<link rel="stylesheet"
+		href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+		<!-- Main css -->
+		<link rel="stylesheet" href="css/style.css">
+			<style>
 <style>
-#content_panel form label>span {
-	width: 130px;
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0;
+	overflow: hidden; /* Prevent scrolling of the body */
 }
 
-#content_panel form input[type="submit"] {
-	margin-left: 195px;
+#container {
+	display: flex;
+	flex: 1;
+	height: 100%; /* Take full height of the viewport */
+	width: 100%;
 }
 
 .sidePanel li a {
@@ -48,12 +57,45 @@ if (auth != null) {
 	font-weight: 700;
 	padding: 2rem 2rem;;
 }
-/* .inf-content{
-    border:1px solid #DDDDDD;
-    -webkit-border-radius:10px;
-    -moz-border-radius:10px;
-    border-radius:10px;
-    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3); */
+
+#side_bar {
+	width: 20vw;
+	background-color: #c0c0c0;
+	position: fixed;
+	height: 100%; /* Full height of the viewport */
+	overflow: auto;
+}
+
+#content_panel {
+	margin-left: 20vw; /* Same as the width of the sidebar */
+	width: 80vw;
+	height: calc(100vh - 16vh); /* Adjust for the footer height */
+	overflow-y: auto;
+	padding-bottom: 5vh; /* Ensure content doesn't overlap footer */
+}
+
+#footer {
+	background-color: black;
+	width: 100%;
+	height: 16vh;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#footer div {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 5vh;
+}
+
+#footer p {
+	font-size: 15px;
+	color: white;
+}
 </style>
 <link rel="stylesheet" href="includes/style.css">
 </head>
@@ -74,13 +116,13 @@ if (auth != null) {
 				<li><a href="leave.jsp">Apply Leave</a></li>
 				<li><a href="viewLeave.jsp">View Leave History</a></li>
 				<li><a href="emp_BalanceLeave.jsp">View Balance Leave</a></li>
-				<li><a href="calander.jsp">Calender</a></li>	
+				<li><a href="LeaveCalendar.jsp">Calender</a></li>	
 
 			</ul>
 		</div>
 
 		<div id="content_panel" style="width: 80vw;">
-			<div class="container bootstrap snippets bootdey"
+			<div class="containerr bootstrap snippets bootdey"
 				style="width: 80vw; margin-top: 3rem; margin-left: 6vw;">
 				<div class="panel-body inf-content">
 					<div class="row">
@@ -161,13 +203,12 @@ if (auth != null) {
 	</div>
 	
 	
-	<div id="footer"
-		style="background-color: black; width: 100%; height:16vh;">
-		<div style="width: 90%; margin: auto auto; display:flex; justify-content: space-between; padding-top: 5vh;">
-			<p style="font-size: 15px;">ELM: Employee Leave Management</p>
-			<p style="font-size: 15px;">Created By: Tirtha Sahu</p>
-			</div>
+	<div id="footer">
+		<div>
+			<p>ELM: Employee Leave Management</p>
+			<p>Created By: Tirtha Sahu</p>
 		</div>
+	</div>
 
 	<%@include file="includes/footer.jsp"%>
 	<script

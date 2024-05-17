@@ -1,4 +1,3 @@
-
 <%@page import="ELM.java.Connection.DbCon"%>
 <%@page import="ELM.java.Model.*"%>
 <%@page import="java.time.LocalDate"%>
@@ -10,13 +9,10 @@
 <%
 LocalDate today = LocalDate.now();
 Users auth = (Users) request.getSession().getAttribute("auth");
-/* List<ApplyLeave> leaves=null; */
 if (auth != null) {
-	request.setAttribute("auth", auth);
-	/* leaves=new LeaveDao(DbCon.getConnection()).getLeavesByUserId(auth.getId()); */
-}
-else{
-	response.sendRedirect("login.jsp");
+    request.setAttribute("auth", auth);
+} else {
+    response.sendRedirect("login.jsp");
 }
 %>
 
@@ -29,23 +25,12 @@ else{
 <title>Employee Page</title>
 <%@include file="includes/header.jsp"%>
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- CSS Bootstrap Link for the User table -->
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet">
 <link rel='stylesheet'
-	href='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-	<!-- Font Icon -->
-<link rel="stylesheet"
-	href="fonts/material-icon/css/material-design-iconic-font.min.css">
-
-<!-- Main css -->
-<link rel="stylesheet" href="css/style.css">
-
-<!-- SWEET ALERT CSS CDN -->
-<link rel="stylesheet" href="alert/dist/sweetalert.css">
+    href='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
 <style>
     body {
         display: flex;
@@ -60,12 +45,6 @@ else{
         height: 100%; /* Take full height of the viewport */
         width: 100%;
     }
-    .sidePanel li a {
-	color: black;
-	font-size: 20px;
-	font-weight: 700;
-	padding: 2rem 2rem;;
-}
     #side_bar {
         width: 20vw;
         background-color: #c0c0c0;
@@ -111,7 +90,7 @@ else{
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 37vh;
+        height: 40vh;
     }
     .box {
         background-color: #ffffff;
@@ -137,10 +116,7 @@ else{
 </head>
 
 <body>
-
-
-	<%@include file="includes/navbar.jsp"%>
-
+    <%@include file="includes/navbar.jsp"%>
     <div id="container">
         <div id="side_bar">
             <ul class="sidePanel">
@@ -152,13 +128,13 @@ else{
                 <li><a href="leave.jsp">Apply Leave</a></li>
                 <li><a href="viewLeave.jsp">View Leave History</a></li>
                 <li><a href="#">View Balance Leave</a></li>
-                <li><a href="LeaveCalendar.jsp">Calender</a></li>  
+                <li><a href="emp_LeaveCalendar.jsp">Calender</a></li>  
             </ul>
         </div>
 
         <div id="content_panel">
             <h2 class="form-title">Your Balance Leave</h2>
-            <a href="leave-count?id=<%=auth.getId() %>" class="btn btn-dark" style="padding: 1.5rem 1.5rem; position: absolute; top: 39%; left: 60%; transform: translate(-50%, -50%);">view balance</a>
+            <a href="leave-count?id=<%=auth.getId() %>" class="btn btn-dark" style="padding: 1.7rem 1.7rem;">view balance</a>
             <div class="sub-container">
                 <div class="box">
                     <h3>Total Leaves</h3>
@@ -189,19 +165,9 @@ else{
             <p>Created By: Tirtha Sahu</p>
         </div>
     </div>
-
-	<%@include file="includes/footer.jsp"%>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-	<!-- JS Bootstrap link for the userTable -->
-	<script
-		src='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+    <%@include file="includes/footer.jsp"%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
 </body>
-
 </html>
-
-
