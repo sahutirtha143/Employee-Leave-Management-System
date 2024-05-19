@@ -16,13 +16,13 @@ LeaveDao ld = new LeaveDao(DbCon.getConnection());*/
 ApplyLeave leave = new ApplyLeave();
 
 /* List<ApplyLeave> leaves = ld.addLeaveRequest(leave); */
-String ID = request.getParameter("id");
+/* String ID = request.getParameter("id");
 Integer empId = Integer.parseInt(ID);
 Class.forName("com.mysql.cj.jdbc.Driver");
 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/employeelm?useSSL=false", "root", "2112");
 Statement stm = con.createStatement();
 String sql = "select * from users where id='" + empId + "'";
-ResultSet rs = stm.executeQuery(sql);
+ResultSet rs = stm.executeQuery(sql); */
 %>
 
 <!DOCTYPE html
@@ -69,9 +69,7 @@ body {
 	color: black;
 	font-size: 20px;
 	font-weight: 700;
-	padding: 2rem 2rem;;
 }
-
 #side_bar {
 	width: 20vw;
 	background-color: #c0c0c0;
@@ -79,7 +77,24 @@ body {
 	height: 100%; /* Full height of the viewport */
 	overflow: auto;
 }
+.sidePanel{
+width: 20vw;
+}
+.sidePanel li {
+	border-bottom: 2px solid #999;
+	
+}
+.sidePanel li a {
+	color: black;
+	font-size: 20px;
+	font-weight: 700;
+	/* padding: 2rem 2rem;; */
+	text-decoration: none;
 
+}
+.sidePanel li a:hover{
+color: blue;
+}
 #content_panel {
 	margin-left: 20vw; /* Same as the width of the sidebar */
 	width: 80vw;
@@ -128,7 +143,7 @@ body {
 			style="width: 20vw; height: 70vh; background-color: #c0c0c0;">
 			<ul class="sidePanel">
 				<li class="menu_head"
-					style="font-size: 30px; margin: 2rem 0; font-weight: 900; padding-left: 2rem;">Controls</li>
+					style="font-size: 30px; margin: 2rem 0; font-weight: 900;">Controls</li>
 				<%-- <li><input type="hidden" name="id" value="<%= auth.getId()%>" class="form-input"></li> --%>
 				<li><a href="employee.jsp">About Employee</a></li>
 				<li><a href="">Update Employee</a></li>
@@ -156,26 +171,26 @@ body {
 
 					<form method="post" action="update-servlet" class="register-form"
 						id="register-form" style="width:35vw;">
-						<%
+						<%-- <%
 						while (rs.next()) {
-						%>
+						%> --%>
 						<!-- <div class="main1"
 							style="display: flex; justify-content: space-around; width: 100%;">
 							<div class="main2" style=""> -->
 						<div class="form-group" style="display: none;">
 							<label for="name"><i class="zmdi zmdi-accounts-list"></i></label>
 							<input type="hidden" name="userId" id="name"
-								value="<%=rs.getInt("id")%>" placeholder="Enter ID" />
+								value="<%=auth.getId() %>" placeholder="Enter ID" />
 						</div>
 						<div class="form-group" style="">
 							<label for="name"><i class="zmdi zmdi-accounts-list"></i></label>
 							<input type="text" name="name" id="name"
-								value="<%=rs.getString("name")%>" placeholder="Enter Name" />
+								value="<%=auth.getName()%>" placeholder="Enter Name" />
 						</div>
 						<div class="form-group">
 							<label for="email"><i class="zmdi zmdi-accounts-list"></i></label>
 							<input type="text" name="email" id="email"
-								value="<%=rs.getString("email")%>" placeholder="Enter Email" />
+								value="<%=auth.getEmail()%>" placeholder="Enter Email" />
 						</div>
 
 						<div class="form-group">
@@ -214,9 +229,9 @@ body {
 									<input type="password" name="conpassword" id="email"
 										placeholder="Enter Conform password" />
 								</div> -->
-						<%
+						<%-- <%
 						}
-						%>
+						%> --%>
 
 						<!-- <div class="form-group form-button" style="position:relative; margin-bottom: 3rem;"> -->
 									<div class="form-group form-button"

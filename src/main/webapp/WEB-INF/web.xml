@@ -179,4 +179,14 @@
     <servlet-name>Emp_LeaveCalanderServlet</servlet-name>
     <url-pattern>/Emp_LeaveCalanderServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Emp_UpdateServlet</display-name>
+    <servlet-name>Emp_UpdateServlet</servlet-name>
+    <servlet-class>ELM.java.Servlet.Emp_UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Emp_UpdateServlet</servlet-name>
+    <url-pattern>/Emp_UpdateServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

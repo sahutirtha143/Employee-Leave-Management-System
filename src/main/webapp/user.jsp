@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 
-	<%@page import="ELM.java.Model.*" %>
-		<%
+<%@page import="ELM.java.Model.*"%>
+<%
 Users auth = (Users) request.getSession().getAttribute("auth");
 if (auth != null) {
 	request.setAttribute("auth", auth);
@@ -155,7 +155,7 @@ hr .new1 {
 				<button class="btn btn-secondary">
 					<img src="images/baba.jpg" height="100" width="100" />
 				</button>
-				<span class="name mt-3"><%=auth.getName()%></span> <span class="idd">@<%=auth.getName()+auth.getId()%></span>
+				<span class="name mt-3"><%=auth.getName()%></span> <span class="idd">@<%=auth.getName() + auth.getId()%></span>
 				<div
 					class="d-flex flex-row justify-content-center align-items-center gap-2">
 					<!-- 			<span class="idd1">Oxc4c16a645_b21a</span> <span><i
@@ -167,7 +167,10 @@ hr .new1 {
 				</div>
 				<div class=" d-flex mt-2">
 					<!-- <button class="btn1 btn-dark">Edit Profile</button> -->
-					<a class="btn1 btn-dark" href="employeeUpdate.jsp?id=<%= auth.getId()%>" style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px;">Edit Profile</a>
+					<a class="btn1 btn-dark"
+						href="employeeUpdate.jsp?id=<%=auth.getId()%>"
+						style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px;">Edit
+						Profile</a>
 				</div>
 				<div class=" d-flex mt-2" style="align-items: center;">
 					<!-- 	<button class="btn1 btn-dark">My Orders</button> -->
@@ -176,12 +179,15 @@ hr .new1 {
 				</div>
 				<div class=" d-flex mt-2">
 					<!-- <button class="btn1 btn-dark" type="submit" name="log-out">LogOut</button> -->
-					<a class="btn1 btn-dark" id="lo" href="log-out" style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px;">Logout</a>
+					<a class="btn1 btn-dark" id="lo" href="log-out"
+						style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px;">Logout</a>
 				</div>
-				
+
 				<div class=" d-flex mt-2">
 					<!-- <button class="btn1 btn-dark" type="submit" name="log-out">LogOut</button> -->
-					<a class="btn1 btn-dark" id="lo" href="delete-user?id=<%=auth.getId() %>" style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px;">Delete</a>
+					<%-- <a class="btn1 btn-dark" id="lo"
+						href="delete-user?id=<%=auth.getId()%>"
+						style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px;">Delete</a> --%>
 				</div>
 				<!-- <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital
                         artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div> -->

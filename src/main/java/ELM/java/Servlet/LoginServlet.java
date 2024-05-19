@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		if (role != null) {
 			
 			if (role.equals("Employee") && str1.equals("Employee")) {
-				System.out.println("Go to the admin login page: " + role);
+				System.out.println("Go to the employee login page: " + role);
 				out.print("user login sucessfully");
 				System.out.println("Login in sucessfully");
 				request.getSession().setAttribute("auth", user);

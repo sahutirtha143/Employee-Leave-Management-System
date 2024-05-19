@@ -65,20 +65,35 @@ body {
 }
 
 .sidePanel li a {
-    color: black;
-    font-size: 20px;
-    font-weight: 700;
-    padding: 2rem 2rem;;
+	color: black;
+	font-size: 20px;
+	font-weight: 700;
 }
-
 #side_bar {
-    width: 20vw;
-    background-color: #c0c0c0;
-    position: fixed;
-    height: 100%; /* Full height of the viewport */
-    overflow: auto;
+	width: 20vw;
+	background-color: #c0c0c0;
+	position: fixed;
+	height: 100%; /* Full height of the viewport */
+	overflow: auto;
 }
+.sidePanel{
+width: 20vw;
+}
+.sidePanel li {
+	border-bottom: 2px solid #999;
+	
+}
+.sidePanel li a {
+	color: black;
+	font-size: 20px;
+	font-weight: 700;
+	/* padding: 2rem 2rem;; */
+	text-decoration: none;
 
+}
+.sidePanel li a:hover{
+color: blue;
+}
 #content_panel {
     margin-left: 20vw; /* Same as the width of the sidebar */
     width: 80vw;
@@ -212,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div id="side_bar">
             <ul class="sidePanel">
                 <li class="menu_head"
-                    style="font-size: 30px; margin: 2rem 0; font-weight: 900; padding-left: 2rem;">Controls</li>
+                    style="font-size: 30px; margin: 2rem 0; font-weight: 900;">Controls</li>
                 <li><a href="employee.jsp">About Employee</a></li>
                 <li><a href="employeeUpdate.jsp?id=<%=auth.getId()%>">Update Employee</a></li>
                 <li><a href="leave.jsp">Apply Leave</a></li>

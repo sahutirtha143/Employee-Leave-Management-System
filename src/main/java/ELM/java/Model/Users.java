@@ -38,6 +38,17 @@ public class Users {
 		this.conPassword = conPassword;
 		this.leaveDay = leaveDay;
 	}
+	
+	
+
+	public Users(int id, String name, String email, String role, String department) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.role = role;
+		this.department = department;
+	}
 
 	public int getId() {
 		return id;

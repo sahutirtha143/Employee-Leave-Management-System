@@ -1,5 +1,6 @@
 
 <%@page import="ELM.java.Model.*"%>
+<%@page import="ELM.java.DAO.*"%>
 <%@page import="java.time.LocalDate"%>
 <%
 LocalDate today = LocalDate.now();
@@ -7,6 +8,7 @@ LocalDate today = LocalDate.now();
 Users auth = (Users) request.getSession().getAttribute("auth");
 if (auth != null) {
 	request.setAttribute("auth", auth);
+
 }
 %>
 
@@ -28,15 +30,15 @@ if (auth != null) {
 <link rel='stylesheet'
 	href='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
 
-	<!-- Font Icon -->
-	<link rel="stylesheet"
-		href="fonts/material-icon/css/material-design-iconic-font.min.css">
+<!-- Font Icon -->
+<link rel="stylesheet"
+	href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
-		<!-- Main css -->
-		<link rel="stylesheet" href="css/style.css">
-			<style>
+<!-- Main css -->
+<link rel="stylesheet" href="css/style.css">
 <style>
-body {
+<
+style>body {
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
@@ -55,9 +57,7 @@ body {
 	color: black;
 	font-size: 20px;
 	font-weight: 700;
-	padding: 2rem 2rem;;
 }
-
 #side_bar {
 	width: 20vw;
 	background-color: #c0c0c0;
@@ -65,7 +65,24 @@ body {
 	height: 100%; /* Full height of the viewport */
 	overflow: auto;
 }
+.sidePanel{
+width: 20vw;
+}
+.sidePanel li {
+	border-bottom: 2px solid #999;
+	
+}
+.sidePanel li a {
+	color: black;
+	font-size: 20px;
+	font-weight: 700;
+	/* padding: 2rem 2rem;; */
+	text-decoration: none;
 
+}
+.sidePanel li a:hover{
+color: blue;
+}
 #content_panel {
 	margin-left: 20vw; /* Same as the width of the sidebar */
 	width: 80vw;
@@ -109,21 +126,22 @@ body {
 			style="width: 20vw; height: 70vh; background-color: #c0c0c0;">
 			<ul class="sidePanel">
 				<li class="menu_head"
-					style="font-size: 30px; margin: 2rem 0; font-weight: 900; padding-left: 2rem;">Controls</li>
-				<li><a href="#">About Employee</a></li>
+					style="font-size: 30px; margin: 2rem 0; font-weight: 900;">Controls</li>
+				<li><a href="#">Hello <span style="color: green;">  <%=auth.getName()%></span>
+				</a></li>
 				<li><a href="employeeUpdate.jsp?id=<%=auth.getId()%> ">Update
 						Employee</a></li>
 				<li><a href="leave.jsp">Apply Leave</a></li>
 				<li><a href="viewLeave.jsp">View Leave History</a></li>
 				<li><a href="emp_BalanceLeave.jsp">View Balance Leave</a></li>
-				<li><a href="LeaveCalendar.jsp">Calender</a></li>	
+				<li><a href="LeaveCalendar.jsp">Calender</a></li>
 
 			</ul>
 		</div>
 
 		<div id="content_panel" style="width: 80vw;">
 			<div class="containerr bootstrap snippets bootdey"
-				style="width: 80vw; margin-top: 3rem; margin-left: 6vw;">
+				style="width: 80vw; margin-top: 2rem; margin-left: 6vw;">
 				<div class="panel-body inf-content">
 					<div class="row">
 						<div class="col-md-4">
@@ -140,7 +158,7 @@ body {
 								<li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
 							</ul>
 						</div>
-						<div class="col-md-6" style="margin-top: 8vh;">
+						<div class="col-md-6" style="margin-top: 4vh;">
 							<strong style="font-size: 25px; font-weight: 900;">Information</strong><br>
 							<div class="table-responsive">
 								<table class="table table-user-information">
@@ -194,6 +212,28 @@ body {
 									</tbody>
 								</table>
 							</div>
+							<div class="userbtnFlex"
+								style="display: flex; width: 38vw; justify-content: space-between;">
+								<div class="btn btn-sm btn-success"
+									style="position: relative; margin-bottom: 3rem;">
+									<a href="employeeUpdate.jsp?id=<%=auth.getId()%>"
+										style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px; color: black; font-weight: 700;">Edit
+										Profile</a>
+								</div>
+
+								<div class="btn btn-sm btn-success"
+									style="position: relative; margin-bottom: 3rem;">
+									<a id="lo" href="log-out"
+										style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px; color: black; font-weight: 700;">Logout</a>
+								</div>
+
+								<div class="btn btn-sm btn-danger"
+									style="position: relative; margin-bottom: 3rem;">
+									<a class="" id="lo" href="delete-user?id=<%=auth.getId() %>"
+										style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px; color: black; font-weight: 700;">Delete</a>
+								</div>
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -201,8 +241,8 @@ body {
 		</div>
 
 	</div>
-	
-	
+
+
 	<div id="footer">
 		<div>
 			<p>ELM: Employee Leave Management</p>

@@ -1,173 +1,266 @@
-<%@page import="ELM.java.Connection.DbCon"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@page import="ELM.java.Model.*"%>
-<%@page import="java.time.LocalDate"%>
-<%@page import="java.util.*"%>
-<%@page import="ELM.java.DAO.*"%>
-<%@ page import="jakarta.servlet.http.*" %>
-<%@ page import="jakarta.servlet.*" %>
-<%@ page import="java.io.*" %>
 <%
-LocalDate today = LocalDate.now();
 Users auth = (Users) request.getSession().getAttribute("auth");
 if (auth != null) {
-    request.setAttribute("auth", auth);
-} else {
-    response.sendRedirect("login.jsp");
+	request.setAttribute("auth", auth);
 }
 %>
-
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Employee Page</title>
-<%@include file="includes/header.jsp"%>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Font Icon -->
 <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    rel="stylesheet">
-<link rel='stylesheet'
-    href='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+	href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+	<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- Main css -->
+<link rel="stylesheet" href="css/style.css">
+
+	<!-- <link rel="stylesheet" href="includes/style.css"> --><%@include
+	file="includes/header.jsp"%>
+
 <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        margin: 0;
-        overflow: hidden; /* Prevent scrolling of the body */
+body, html {
+	overflow-x: hidden;
+	
+}
+
+.home-page, .carousel-inner img {
+	width: 100%;
+	height: auto;
+}
+
+.home-heading {
+width:65%;
+	position: absolute;
+	top: 8%;
+	left: 32%;
+	transform: translate(-50%, -50%);
+	background-color:transparent; 
+	/* text-align: left; */
+}
+.wrapper{
+	 display: flex;
+  align-items: center;
+  justify-content: center;
+ /*  min-height: 100vh; */
+     background-color:#cfd2c3; 
+      z-index: 100;
     }
-    #container {
-        display: flex;
-        flex: 1;
-        height: 100%; /* Take full height of the viewport */
-        width: 100%;
+    .wrapper .static-txt{
+      color: black;
+      font-size: 45px;
+      font-weight: 700;
     }
-    #side_bar {
-        width: 20vw;
-        background-color: #c0c0c0;
-        position: fixed;
-        height: 100%; /* Full height of the viewport */
-        overflow: auto;
+    .wrapper .dynamic-txts{
+      /* margin-left: 15px;
+      height: 90px;
+      line-height: 90px; */
+      overflow: hidden;
     }
-    #content_panel {
-        margin-left: 20vw; /* Same as the width of the sidebar */
-        width: 80vw;
-        height: calc(100vh - 16vh); /* Adjust for the footer height */
-        overflow-y: auto;
-        padding-bottom: 5vh; /* Ensure content doesn't overlap footer */
+    .dynamic-txts li{
+      list-style: none;
+      color: #FC6D6D;
+      font-size: 40px;
+      font-weight: 700;
+      position: relative;
+      top: 0;
+      animation: slide 12s steps(1) infinite;
     }
-    #footer {
-        background-color: black;
-        width: 100%;
-        height: 16vh;
-        position: fixed;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    @keyframes slide {
+      0%, 25%, 50%, 75% {
+        top: 0;
+      }
+      100%{
+        top: 0;
+      }
     }
-    #footer div {
-        width: 90%;
-        display: flex;
-        justify-content: space-between;
-        padding-top: 5vh;
+    .dynamic-txts li span{
+      position: relative;
+      margin: 5px 0;
+      line-height: 90px;
     }
-    #footer p {
-        font-size: 15px;
-        color: white;
+    .dynamic-txts li span::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      height:120%;
+      width: 100%;
+      background-color:#cfd2c3; 
+      border-left: 2px solid #FC6D6D;
+      animation: typing 3s steps(20) infinite;
     }
-    .form-title {
-        width: 100%;
-        text-align: center;
-        font-size: 50px;
-        margin-top: 5vh;
+    @keyframes typing {
+      0%, 100% {
+        left: 0;
+      }
+      40%, 60%{
+        left: 100%;
+      }
     }
-    .sub-container {
-        width: 80vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 40vh;
-    }
-    .box {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
-        text-align: center;
-        margin: 10px;
-        width: 172px;
-        height: 20vh;
-    }
-    .box h3 {
-        margin-top: 0;
-        color: #333333;
-    }
-    .box p {
-        font-size: 24px;
-        font-weight: bold;
-        color: green;
-    }
+
+#footer {
+	background-color: black;
+	width: 100%;
+	height: 16vh;
+	/*  position: fixed;
+    bottom: 0; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2; /* Ensure the footer is above the content */
+}
+
+#footer div {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 5vh;
+}
+
+#footer p {
+	margin-top: 3vh;
+	font-size: 15px;
+	color: white;
+}
+
+.form-title {
+	width: 100%;
+	text-align: center;
+	font-size: 50px;
+	margin-top: 6vh;
+}
 </style>
-<link rel="stylesheet" href="includes/style.css">
+
 </head>
+<body style="width: 100%;">
+	<%@include file="includes/navbar.jsp"%>
 
-<body>
-    <%@include file="includes/navbar.jsp"%>
-    <div id="container">
-        <div id="side_bar">
-            <ul class="sidePanel">
-                <li class="menu_head"
-                    style="font-size: 30px; margin: 2rem 0; font-weight: 900; padding-left: 2rem;">Controls</li>
-                <li><a href="employee.jsp">About Employee</a></li>
-                <li><a href="employeeUpdate.jsp?id=<%=auth.getId()%>">Update
-                        Employee</a></li>
-                <li><a href="leave.jsp">Apply Leave</a></li>
-                <li><a href="viewLeave.jsp">View Leave History</a></li>
-                <li><a href="#">View Balance Leave</a></li>
-                <li><a href="emp_LeaveCalendar.jsp">Calender</a></li>  
-            </ul>
-        </div>
+	<section class="home-page">
+		<div id="homePageCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ul class="carousel-indicators">
+				<li data-target="#homePageCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#homePageCarousel" data-slide-to="1"></li>
+				<li data-target="#homePageCarousel" data-slide-to="2"></li>
+			</ul>
 
-        <div id="content_panel">
-            <h2 class="form-title">Your Balance Leave</h2>
-            <a href="leave-count?id=<%=auth.getId() %>" class="btn btn-dark" style="padding: 1.7rem 1.7rem;">view balance</a>
-            <div class="sub-container">
-                <div class="box">
-                    <h3>Total Leaves</h3>
-                    <p><%= request.getAttribute("totalLeaves") %></p>
-                </div>
-                <div class="box">
-                    <h3>Remaining Leaves</h3>
-                    <p><%= request.getAttribute("remainingLeaves") %></p> 
-                </div>
-                <div class="box">
-                    <h3>Sick Leaves</h3>
-                    <p><%= request.getAttribute("sickLeaves") %></p> 
-                </div>
-                <div class="box">
-                    <h3>Vacation Leaves</h3>
-                    <p><%= request.getAttribute("vacationLeaves") %></p> 
-                </div>
-                <div class="box">
-                    <h3>Other Leaves</h3>
-                    <p><%= request.getAttribute("otherLeaves") %></p> 
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="footer">
-        <div>
-            <p>ELM: Employee Leave Management</p>
-            <p>Created By: Tirtha Sahu</p>
-        </div>
-    </div>
-    <%@include file="includes/footer.jsp"%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src='https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+			<!-- The slideshow -->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="images/home/home10.png" alt="Image 1"
+						class="d-block w-100">
+					 <div class="home-heading"> 
+						<div class="wrapper">
+							<div class="static-txt">EMPLOYEE</div>
+							<div class="dynamic-txt">
+							<ul class="dynamic-txts">
+								<li><span>LEAVE MANAGEMENT SYSTEM</span></li>
+							</ul>
+							</div>
+						</div>
+				</div> 
+
+					<div class="carousel-caption">
+						<h3>Home Image 1</h3>
+						<!-- <p>Description for Image 1</p>  -->
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="images/home/home15.jpg" alt="Image 2"
+						class="d-block w-100">
+					<div class="carousel-caption">
+						<h3>Home Image 2</h3>
+						<!-- <p>Description for Image 2</p> -->
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="images/home/home20.jpg" alt="Image 3"
+						class="d-block w-100">
+					<div class="carousel-caption">
+						<h3>Home Image 3</h3>
+						<!-- 	<p>Description for Image 3</p> -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="carousel-control-prev" href="#homePageCarousel"
+				data-slide="prev"> <span class="carousel-control-prev-icon"></span>
+			</a> <a class="carousel-control-next" href="#homePageCarousel"
+				data-slide="next"> <span class="carousel-control-next-icon"></span>
+			</a>
+		</div>
+	</section>
+
+	<section class="about-info-box sec-padding" id="home">
+		<div class="thm-container">
+			<div class="row">
+				<div class="col-lg-8 col-md-8">
+					<div class="sec-title">
+						<h2>
+							<span>What is ELM</span>
+						</h2>
+						<ul class="bulleted-list">
+							<li><i class="fa fa-arrow-circle-right"></i>Employee leave
+								management is a system designed to streamline and automate the
+								process of managing employee leave requests within an
+								organization. It facilitates efficient tracking, approval, and
+								monitoring of employee leave, ensuring smooth operation and
+								compliance with company policies.</li>
+						</ul>
+						<h2>
+							<span>What does ELM means?</span>
+						</h2>
+						<ul class="bulleted-list">
+							<li><i class="fa fa-arrow-circle-right"></i> ELM - Employee
+								Leave Management</li>
+							<li><i class="fa fa-arrow-circle-right"></i>The Employee
+								Leave Management System is basically an online platform for
+								managing and tracking employee leave requests and balances</li>
+						</ul>
+						<h2>
+							<span>Reasons to Use ELM</span>
+						</h2>
+						<ul class="bulleted-list">
+							<li><i class="fa fa-arrow-circle-right"></i>Efficient
+								resource allocation, compliance assurance, and enhanced
+								employee experience.</li>
+							<li><i class="fa fa-arrow-circle-right"></i> Streamlined
+								leave tracking promotes efficient resource allocation, ensures
+								compliance, and enhances employee satisfaction.</li>
+							<li><i class="fa fa-arrow-circle-right"></i> Automated leave
+								management optimizes resource allocation, ensures compliance,
+								and boosts employee satisfaction.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div id="footer">
+		<div>
+			<p>ELM: Employee Leave Management</p>
+			<p>Created By: Tirtha Sahu</p>
+		</div>
+	</div>
+
+	<%@include file="includes/footer.jsp"%>
+
+	<!-- jQuery, Popper.js, and Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <%@page import="ELM.java.Model.*"%>
 <%
 Users auth = (Users) request.getSession().getAttribute("auth");
-if (auth != null) {
+if (auth != null && auth.getRole().equals("Manager")) {
 	request.setAttribute("auth", auth);
 }
 %>
@@ -101,14 +101,14 @@ if (auth != null) {
 					<div class="form-group">
 						<label for="username"><i
 							class="zmdi zmdi-account material-icons-name"></i></label> <input
-							type="text" name="" id="username"
-							placeholder="Your UserId" />
-					</div>
+							type="text" name="uid" id="username" value=""
+							placeholder="Admin UserId" />
+					</div> 
 					<div class="form-group">
 						<label for="username"><i
 							class="zmdi zmdi-account material-icons-name"></i></label> <input
 							type="text" name="useremail" id="username"
-							placeholder="Your Email" />
+							placeholder="Admin Email" />
 					</div>
 					<div class="form-group">
 						<label for="password"><i class="zmdi zmdi-lock"></i></label> <input

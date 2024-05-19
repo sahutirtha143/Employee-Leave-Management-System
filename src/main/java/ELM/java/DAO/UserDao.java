@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ELM.java.Connection.DbCon;
 import ELM.java.Model.Users;
 
 public class UserDao {
@@ -26,10 +27,12 @@ public class UserDao {
 
 	private static final String INSERT_USERS_SQL = "INSERT INTO users (name, email, rule, department, password, conpassword) VALUES (?, ?, ?, ?,?,?)";
 	private static final String SELECT_USER = "select * from users where email=? and password=?";
-	private static final String UPDATE_USER="UPDATE users SET name=?, email=?,rule=?,department=? where id=?";
+	private static final String SELECT_ADMIN = "select * from users where id=? and email=? and password=?";	
+	private static final String UPDATE_USER="UPDATE users SET name = ?, email = ?, rule = ?, department = ?  WHERE id = ?";
 	private static final String DELETE_USER="delete from users where id=?";
 	private static final String SELECT_ALL_USERS="select * from users";  //FOR ADMIN PAGE
 	private static final String ADMIN_CREATE_USERS_SQL = "INSERT INTO users (name, email, rule, department, password, conpassword,leave_day) VALUES (?, ?, ?, ?,?,?,?)";
+	private static final String GET_USER_BY_ID="SELECT * FROM users WHERE id = ?";
 
 
 	protected Connection getConnection() {
@@ -44,6 +47,7 @@ public class UserDao {
 		}
 		return connection;
 	}
+	
 //EMPLOYEE SIGNUP
 	public boolean registerUser(String name, String email, String rule, String department, String password,
 			String conpassword) {
@@ -64,6 +68,7 @@ public class UserDao {
 		return rowInserted;
 	}
 	
+	
 	//EMPLOYEE SIGNIN
 	public Users userLogin(String email, String password) {
 		Users us = null;
@@ -80,8 +85,6 @@ public class UserDao {
 				us.setEmail(rs.getString("email"));
 				us.setRole(rs.getString("rule"));
 				us.setDepartment(rs.getString("department"));
-				
-
 			}
 
 		} catch (Exception e) {
@@ -89,32 +92,55 @@ public class UserDao {
 			e.getStackTrace();
 			System.out.println(e.getMessage());
 		}
-
 		return us;
 	}
 	
-	//EMPLOYEE UPDATE
-	public boolean updateUser(Users user) throws SQLException {
-		/* boolean rowUpdated; */
-		int rowsUpdated;
+	
+	//ADMIN SIGNIN
+	public Users adminLogin(int id,String email, String password) {
+		Users us = null;
 		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
-			statement.setString(1,user.getName());
-			statement.setString(2, user.getEmail());
-			statement.setString(3, user.getRole());
-			statement.setString(4, user.getDepartment());
-//			statement.setString(5, user.getPassword());
-//			statement.setString(6, user.getConPassword());
-			statement.setInt(5, user.getId());
-			/* rowUpdated=statement.executeUpdate()>0; */
-			rowsUpdated = statement.executeUpdate();
-			return rowsUpdated>0; 
-		}catch (SQLException e) {
-            e.printStackTrace();
-		 return false; 
-        }
-		
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ADMIN)) {
+			preparedStatement.setInt(1, id);
+			preparedStatement.setString(2, email);
+			preparedStatement.setString(3, password);
+			rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				us = new Users();
+				us.setId(rs.getInt("id"));
+				us.setName(rs.getString("name"));
+				us.setEmail(rs.getString("email"));
+				us.setRole(rs.getString("rule"));
+				us.setDepartment(rs.getString("department"));
+				us.setLeaveDay(rs.getInt("Leave_Day"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.getStackTrace();
+			System.out.println(e.getMessage());
+		}
+		return us;
 	}
+	
+	
+	//EMPLOYEE UPDATE
+	public boolean updateUser(Users user) {
+        boolean rowUpdated = false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER)) {
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getRole());
+            preparedStatement.setString(4, user.getDepartment());
+            preparedStatement.setInt(5, user.getId());
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowUpdated;
+    }
+	
 	
 	//EMPLOYEE DELETE
 	 public void deleteUser(int id) {
@@ -127,12 +153,11 @@ public class UserDao {
 				// TODO: handle exception
 				e.getStackTrace();
 				System.out.println(e.getMessage());
-			}
-		 
-			
+			}	
 		}
 	 
-	    //DYNAMICALLY ALL EMPLOYEE DATA FETCH INTO THE admin_EmployeeList.jsp PAGE 
+	 
+	 //DYNAMICALLY ALL EMPLOYEE DATA FETCH INTO THE admin_EmployeeList.jsp PAGE 
 	 public List<Users> selectAllUsers(Users user){
 		 List<Users> user_list=new ArrayList<Users>();
 		 try (Connection connection = getConnection();
@@ -158,7 +183,8 @@ public class UserDao {
 		 return user_list;
 	 }
 	 
-	//ADMINUSER CREATION
+	 
+	 //ADMINUSER CREATION
 		public boolean adminCreateUser(String name, String email, String rule, String department, String password,
 				String conpassword,int leave_day) {
 			boolean rowInserted = false;
@@ -178,6 +204,28 @@ public class UserDao {
 			}
 			return rowInserted;
 		}
-	
+		
+		
+		//GET USER BY ID-> REQUIRED FOR USER UPDATE IN ADMIN PANEL
+		 public Users getUserById(int userId) {
+			 Users user = null;
+		        try (Connection connection = getConnection();
+		             PreparedStatement preparedStatement = connection.prepareStatement(GET_USER_BY_ID)) {
+		            preparedStatement.setInt(1, userId);
+		            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+		                if (resultSet.next()) {
+		                    user = new Users();
+		                    user.setId(resultSet.getInt("id"));
+		                    user.setName(resultSet.getString("name"));
+		                    user.setEmail(resultSet.getString("email"));
+		                    user.setRole(resultSet.getString("rule"));
+		                    user.setDepartment(resultSet.getString("department"));
+		                }
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		        return user; 
+		 }
 
 }

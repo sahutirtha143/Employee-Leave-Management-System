@@ -14,55 +14,59 @@ import ELM.java.Model.Users;
 @WebServlet("/admin-login")
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.sendRedirect("adminLogin.jsp");
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		String role = request.getParameter("rule");
 		System.out.println("Role : " + role);
+
+		 String uid=request.getParameter("uid"); 
+		 int id=Integer.parseInt(uid);
+		
 		String email = request.getParameter("useremail");
 		String password = request.getParameter("userpassword");
-		
+
 		UserDao udao = new UserDao();
-		Users user = udao.userLogin(email, password);
+		Users user = udao.adminLogin(id, email, password);
+		/* Users user = udao.userLogin(email, password); */
 
 		String str1 = user.getRole();
-		String str2="Manager";
+		System.out.println(str1);
+		String str2 = "Manager";
 		try {
-		if(user!=null) {
-		if (role != null) {
-			
-			if (role.equals("Manager") && str1.equals("Manager")) {
-				System.out.println("Go to the admin login page: " + role);
-				out.print("user login sucessfully");
-				System.out.println("Login in sucessfully");
-				request.getSession().setAttribute("auth", user);
-				response.sendRedirect("admin.jsp");
+			if (user != null) {
+				if (role != null) {
+
+					if (role.equals("Manager") && str1.equals("Manager")) {
+						System.out.println("Go to the admin-xx login page: " + role);
+						out.print("user login sucessfully");
+						System.out.println("Login in sucessfully");
+						request.getSession().setAttribute("auth", user);
+						response.sendRedirect("admin.jsp");
+					} else {
+						System.out.println("Mismatch between selected role and user's role in the database" + str1);
+						out.print("Mismatch between selected role and user's role in the database");
+					}
+				} else {
+					out.print("user singnup failed");
+				}
 			} else {
-				System.out.println("Mismatch between selected role and user's role in the database"+ str1);
-				out.print("Mismatch between selected role and user's role in the database");
+				System.out.println("Login unsucessfully");
 			}
-		} else {	
-			out.print("user singnup failed");
-		}
-		}else {
-			System.out.println("Login unsucessfully");
-		}
 
-		
-
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

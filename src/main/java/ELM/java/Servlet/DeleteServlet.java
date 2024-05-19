@@ -20,11 +20,12 @@ public class DeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try(PrintWriter out=response.getWriter()) {
 			String id=request.getParameter("id");
-			if(id!=null) {
+			if(id!=null && request.getSession().getAttribute("auth") != null) {
 				UserDao udao=new UserDao();
 				udao.deleteUser(Integer.parseInt(id));
+				request.getSession().removeAttribute("auth");
 			}
-			response.sendRedirect("registration.jsp");
+			response.sendRedirect("home.jsp");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -54,7 +54,6 @@ body {
 	color: black;
 	font-size: 20px;
 	font-weight: 700;
-	padding: 2rem 2rem;;
 }
 
 #side_bar {
@@ -63,6 +62,24 @@ body {
 	position: fixed;
 	height: 100%; /* Full height of the viewport */
 	overflow: auto;
+}
+.sidePanel{
+width: 20vw;
+}
+.sidePanel li {
+	border-bottom: 2px solid #999;
+	
+}
+.sidePanel li a {
+	color: black;
+	font-size: 20px;
+	font-weight: 700;
+	/* padding: 2rem 2rem;; */
+	text-decoration: none;
+
+}
+.sidePanel li a:hover{
+color: blue;
 }
 
 #content_panel {
@@ -107,9 +124,9 @@ body {
         <div id="side_bar">
             <ul class="sidePanel">
 				<li class="menu_head"
-					style="font-size: 30px; margin: 2rem 0; font-weight: 900; padding-left: 2rem;">Controls</li>
-				<li><a href="#" style="color: black;">Dashboard</a></li>
-				<li><a href="#" style="color: black;">About Admin</a></li>
+					style="font-size: 30px; font-weight: 900; margin: 2rem 0;">Controls</li>
+				<li><a href="dashboard.jsp" style="color: black;">Dashboard</a></li>
+				<li><a href="#" style="color: black;">Hello<span style="color: green;"><%=auth.getName() %></span></a></li>
 				<li><a href="admin_EmployeeList.jsp" style="color: black;">Employee
 						List</a></li>
 				<li><a href="admin_LeaveAuthorize.jsp" style="color: black;">Leave
@@ -192,6 +209,28 @@ body {
 										</tr>
 									</tbody>
 								</table>
+							</div>
+								<div class="userbtnFlex"
+								style="display: flex; width: 38vw; justify-content: space-between;">
+								<div class="btn btn-sm btn-success"
+									style="position: relative; margin-bottom: 3rem;">
+									<a href="admin_update.jsp?id=<%=auth.getId()%>"
+										style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px; color: black; font-weight: 700;">Edit
+										Profile</a>
+								</div>
+
+								<div class="btn btn-sm btn-success"
+									style="position: relative; margin-bottom: 3rem;">
+									<a id="lo" href="log-out"
+										style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px; color: black; font-weight: 700;">Logout</a>
+								</div>
+
+								<div class="btn btn-sm btn-danger"
+									style="position: relative; margin-bottom: 3rem;">
+									<a class="" id="lo" href="delete-user?id=<%=auth.getId() %>"
+										style="text-decoration: none; text-align: center; margin-top: 1rem; padding-top: 9px; color: black; font-weight: 700;">Delete</a>
+								</div>
+
 							</div>
 						</div>
 					</div>

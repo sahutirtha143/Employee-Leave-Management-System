@@ -22,7 +22,7 @@ if (auth != null) {
 
 <!-- <!-- Main css -->
 <link rel="stylesheet" href="css/style.css">
--->
+
 
 <!-- SWEET ALERT CSS CDN -->
 <link rel="stylesheet" href="alert/dist/sweetalert.css">
@@ -31,8 +31,9 @@ if (auth != null) {
 </head>
 <body style="background-color: #10151B;">
 	<%@include file="includes/navbar.jsp"%>
+	
 	<input type="hidden" id="status"
-		value="<%=request.getAttribute("status")%>">
+		value="<%=request.getAttribute("status")%>" style="display: none;">
 
 	<!-- 	<div class="main" style="display: flex; align-items: center; background-color: red; height: 100vh; width: 100%;"> -->
 

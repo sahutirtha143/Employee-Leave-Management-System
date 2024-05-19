@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import ELM.java.Connection.DbCon;
+import ELM.java.DAO.LeaveDao;
 import ELM.java.DAO.UserDao;
 import ELM.java.Model.Users;
 
@@ -23,53 +25,43 @@ public class UpdateServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			int userId = Integer.parseInt(request.getParameter("userId"));
-	        String name = request.getParameter("name");
-	        String email = request.getParameter("email");
-	        String role=request.getParameter("rule");
-	        String department=request.getParameter("department");
-//	        String password = request.getParameter("password");
-//	        String conpassword = request.getParameter("conpassword");
-	        
-	        Connection con;
-	        PreparedStatement pst;
+			
+		int id = Integer.parseInt(request.getParameter("userId"));
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String role = request.getParameter("rule");
+		String department = request.getParameter("department");
 
-//	        Users user = new Users();
-//	        user.setId(userId);
-//	        user.setName(name);
-//	        user.setEmail(email);
-//	        user.setRule(rule);
-//	        user.setDepartment(department);
-//	        user.setPassword(password);
-//	        user.setConPassword(conpassword);
-	        
-			/*
-			 * UserDao userDao=new UserDao(); try { if (userDao.updateUser(user)) {
-			 * response.sendRedirect("employeeUpdate.jsp?success=true"); } else {
-			 * response.sendRedirect("employeeUpdate.jsp?success=false"); } } catch
-			 * (SQLException e) { // TODO Auto-generated catch block e.printStackTrace();
-			 * System.out.println("Error1"+e.getMessage()); } catch (IOException e) { //
-			 * TODO Auto-generated catch block e.printStackTrace();
-			 * System.out.println("Error2"+e.getMessage());
-			 * 
-			 * }
-			 */
-	        try {
-	        	Class.forName("com.mysql.cj.jdbc.Driver");
-				 con=DriverManager.getConnection("jdbc:mysql://localhost:3307/employeelm?useSSL=false","root","2112");
-				 pst=con.prepareStatement("UPDATE users SET name=?, email=?,rule=?,department=? where id=?");
-				 pst.setString(1, name);
-				 pst.setString(2, email);
-				 pst.setString(3, role);
-				 pst.setString(4, department);
-				 pst.setInt(5, userId);
-				 pst.executeUpdate();
-				 response.sendRedirect("employee.jsp");
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
+		UserDao userDao = new UserDao();
+		Users user = new Users(id, name, email, role, department);
+		boolean isUpdated = userDao.updateUser(user);
+
+		if (isUpdated) {
+			response.sendRedirect("employeeUpdate.jsp?success=true");
+		} else {
+			response.sendRedirect("employeeUpdate.jsp?success=false");
+		}
+		
+		
+		/*
+		 * int userId = Integer.parseInt(request.getParameter("userId")); String name =
+		 * request.getParameter("name"); String email = request.getParameter("email");
+		 * String role=request.getParameter("rule"); String
+		 * department=request.getParameter("department");
+		 * 
+		 * Connection con; PreparedStatement pst; try {
+		 * Class.forName("com.mysql.cj.jdbc.Driver"); con=DriverManager.getConnection(
+		 * "jdbc:mysql://localhost:3307/employeelm?useSSL=false","root","2112");
+		 * pst=con.
+		 * prepareStatement("UPDATE users SET name=?, email=?,rule=?,department=? where id=?"
+		 * ); pst.setString(1, name); pst.setString(2, email); pst.setString(3, role);
+		 * pst.setString(4, department); pst.setInt(5, userId); pst.executeUpdate();
+		 * response.sendRedirect("employee.jsp");
+		 * 
+		 * 
+		 * 
+		 * } catch (Exception e) { // TODO: handle exception e.printStackTrace(); }
+		 */
 	}
 
 }
