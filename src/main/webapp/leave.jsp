@@ -132,7 +132,7 @@ color: blue;
 					style="font-size: 30px; margin: 2rem 0; font-weight: 900;">Controls</li>
 				<%-- <li><input type="hidden" name="id" value="<%= auth.getId()%>" class="form-input"></li> --%>
 				<li><a href="employee.jsp">About Employee</a></li>
-				<li><a href="employeeUpdate.jsp?id=<%=auth.getId()%>">Update
+				<li><a href="employeeUpdate.jsp">Update
 						Employee</a></li>
 				<li><a href="#">Apply Leave</a></li>
 				<li><a href="viewLeave.jsp">View Leave History</a></li>

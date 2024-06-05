@@ -10,10 +10,8 @@
 <%
 LocalDate today = LocalDate.now();
 Users auth = (Users) request.getSession().getAttribute("auth");
-/* List<ApplyLeave> leaves=null; */
 if (auth != null) {
 	request.setAttribute("auth", auth);
-	/* leaves=new LeaveDao(DbCon.getConnection()).getLeavesByUserId(auth.getId()); */
 }
 else{
 	response.sendRedirect("login.jsp");
@@ -164,7 +162,7 @@ color: blue;
                 <li class="menu_head"
                     style="font-size: 30px; margin: 2rem 0; font-weight: 900;">Controls</li>
                 <li><a href="employee.jsp">About Employee</a></li>
-                <li><a href="employeeUpdate.jsp?id=<%=auth.getId()%>">Update
+                <li><a href="employeeUpdate.jsp">Update
                         Employee</a></li>
                 <li><a href="leave.jsp">Apply Leave</a></li>
                 <li><a href="viewLeave.jsp">View Leave History</a></li>
@@ -175,7 +173,7 @@ color: blue;
 
         <div id="content_panel">
             <h2 class="form-title">Your Balance Leave</h2>
-            <a href="leave-count?id=<%=auth.getId() %>" class="btn btn-dark" style="padding: 1.5rem 1.5rem; position: absolute; top: 39%; left: 60%; transform: translate(-50%, -50%);">view balance</a>
+            <a href="leave-count?id=<%=auth.getId()%>" class="btn btn-dark" style="padding: 1.5rem 1.5rem; position: absolute; top: 39%; left: 60%; transform: translate(-50%, -50%);">view balance</a>
             <div class="sub-container">
                 <div class="box">
                     <h3>Total Leaves</h3>

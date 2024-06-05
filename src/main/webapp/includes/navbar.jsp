@@ -6,7 +6,7 @@
 
 		<div class="header-right" style="display: flex; align-items: center;">
 
-			<a href="home.jsp">Home</a>
+			<a href="index.jsp">Home</a>
 			<%
 			if (auth != null) {
 			%>

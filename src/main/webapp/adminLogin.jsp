@@ -51,39 +51,7 @@ if (auth != null && auth.getRole().equals("Manager")) {
 <body style="background-color: #10151B;">
 
 	 <%@include file="includes/adminNavbar.jsp"%> 
-<%-- 	<header>
-		<div class="header">
-			<a href="home.jsp" class="logo"><img
-				style="height: 100px; width: 100px;" src="images/logo/logo3.png"
-				alt="logo"></a>
 
-			<div class="header-right" style="display: flex; align-items: center;">
-
-				<a href="home.jsp">Home</a>
-				 <!-- <%
-                if (auth != null) {
-                %> -->
-				<a href="user.jsp">Profile</a> <a href="employee.jsp">About
-					Admin</a>
-
-				<!-- <%
-                } else {
-                %> -->
-				<div class="subnav">
-					<button class="subnavbtn">
-						Register<i class="#"></i>
-					</button>
-					<div class="subnav-content">
-						<li><a href="registration.jsp">SignUp</a></li>
-						<li><a href="login.jsp">SignIn </a></li>
-					</div>
-				</div>
-				  <!-- <%
-                }
-                %> -->
-			</div>
-		</div>
-	</header> --%>
 	<!-- <input type="hidden" id="status"
 		value="<%=request.getAttribute("status")%>">
 	
@@ -166,13 +134,13 @@ if (auth != null && auth.getRole().equals("Manager")) {
 	<!-- </section> -->
 
 	</div>
-	<div id="footer"
-		style="background-color: black; width: 100%; height:16vh;">
-		<div style="width: 90%; margin: auto auto; display:flex; justify-content: space-between; padding-top: 5vh;">
-			<p style="font-size: 15px;">ELM: Employee Leave Management</p>
-			<p style="font-size: 15px;">Created By: Tirtha Sahu</p>
-			</div>
+	<div id="footer">
+		<div>
+			<p>ELM: Employee Leave Management</p>
+			<p>Created By: Tirtha Sahu</p>
 		</div>
+	</div>
+
 
 	<!-- JS -->
 	<script src="vendor/jquery/jquery.min.js"></script>

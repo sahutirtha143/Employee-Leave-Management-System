@@ -33,7 +33,7 @@ public class ApplyLeaveHistoryServlet extends HttpServlet {
 			
 			// USER AUTHENTICATION
 						Users auth = (Users) request.getSession().getAttribute("auth");
-						
+	
 						if (leave_list != null && auth != null) {
 							for (ApplyLeave al : leave_list) {
 								ApplyLeave applyleave=new ApplyLeave();

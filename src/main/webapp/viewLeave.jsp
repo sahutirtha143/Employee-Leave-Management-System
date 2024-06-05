@@ -46,24 +46,27 @@ if (leave_List != null) {
 <!-- SWEET ALERT CSS CDN -->
 <link rel="stylesheet" href="alert/dist/sweetalert.css">
 <style>
-    body {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        margin: 0;
-        overflow: hidden; /* Prevent scrolling of the body */
-    }
-    #container {
-        display: flex;
-        flex: 1;
-        height: 100%; /* Take full height of the viewport */
-        width: 100%;
-    }
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 0;
+	overflow: hidden; /* Prevent scrolling of the body */
+}
+
+#container {
+	display: flex;
+	flex: 1;
+	height: 100%; /* Take full height of the viewport */
+	width: 100%;
+}
+
 .sidePanel li a {
 	color: black;
 	font-size: 20px;
 	font-weight: 700;
 }
+
 #side_bar {
 	width: 20vw;
 	background-color: #c0c0c0;
@@ -71,51 +74,58 @@ if (leave_List != null) {
 	height: 100%; /* Full height of the viewport */
 	overflow: auto;
 }
-.sidePanel{
-width: 20vw;
+
+.sidePanel {
+	width: 20vw;
 }
+
 .sidePanel li {
 	border-bottom: 2px solid #999;
-	
 }
+
 .sidePanel li a {
 	color: black;
 	font-size: 20px;
 	font-weight: 700;
 	/* padding: 2rem 2rem;; */
 	text-decoration: none;
+}
 
+.sidePanel li a:hover {
+	color: blue;
 }
-.sidePanel li a:hover{
-color: blue;
+
+#content_panel {
+	margin-left: 20vw; /* Same as the width of the sidebar */
+	width: 80vw;
+	height: calc(100vh - 16vh); /* Adjust for the footer height */
+	overflow-y: auto;
+	padding-bottom: 5vh; /* Ensure content doesn't overlap footer */
 }
-    #content_panel {
-        margin-left: 20vw; /* Same as the width of the sidebar */
-        width: 80vw;
-        height: calc(100vh - 16vh); /* Adjust for the footer height */
-        overflow-y: auto;
-        padding-bottom: 5vh; /* Ensure content doesn't overlap footer */
-    }
-    #footer {
-        background-color: black;
-        width: 100%;
-        height: 16vh;
-        position: fixed;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    #footer div {
-        width: 90%;
-        display: flex;
-        justify-content: space-between;
-        padding-top: 5vh;
-    }
-    #footer p {
-        font-size: 15px;
-        color: white;
-    }
+
+#footer {
+	background-color: black;
+	width: 100%;
+	height: 16vh;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#footer div {
+	width: 90%;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 5vh;
+}
+
+#footer p {
+	font-size: 15px;
+	color: white;
+}
+
 .btn-incre {
 	box-shadow: none;
 	font-size: 20px;
@@ -146,20 +156,20 @@ color: blue;
 	<%@include file="includes/navbar.jsp"%>
 
 
-	 <div id="container">
-        <div id="side_bar">
-            <ul class="sidePanel">
-                <li class="menu_head"
-                    style="font-size: 30px; margin: 2rem 0; font-weight: 900;">Controls</li>
-                <li><a href="employee.jsp">About Employee</a></li>
-                <li><a href="employeeUpdate.jsp?id=<%=auth.getId()%>">Update
-                        Employee</a></li>
-                <li><a href="leave.jsp">Apply Leave</a></li>
-                <li><a href="viewLeave.jsp">View Leave History</a></li>
-                <li><a href="emp_BalanceLeave.jsp">View Balance Leave</a></li>
-                <li><a href="LeaveCalendar.jsp">Calender</a></li>  
-            </ul>
-        </div>
+	<div id="container">
+		<div id="side_bar">
+			<ul class="sidePanel">
+				<li class="menu_head"
+					style="font-size: 30px; margin: 2rem 0; font-weight: 900;">Controls</li>
+				<li><a href="employee.jsp">About Employee</a></li>
+				<li><a href="employeeUpdate.jsp">Update
+						Employee</a></li>
+				<li><a href="leave.jsp">Apply Leave</a></li>
+				<li><a href="viewLeave.jsp">View Leave History</a></li>
+				<li><a href="emp_BalanceLeave.jsp">View Balance Leave</a></li>
+				<li><a href="LeaveCalendar.jsp">Calender</a></li>
+			</ul>
+		</div>
 
 		<div id="content_panel" style="width: 80vw;">
 			<!-- <div class="sub-container" style="width: 80%;"> -->
@@ -205,11 +215,14 @@ color: blue;
 						<td>
 							<%
 							if (c.getStatus().equals("Approved")) {
-							%> <span class="approved"><%=c.getStatus()%></span> <%
- } else {
- %> <span class="pending"><%=c.getStatus()%></span> <%
- }
- %>
+							%> 
+							<span class="approved"><%=c.getStatus()%></span> 
+							<%
+ 							} else {
+ 							%> 
+ 							<span class="pending"><%=c.getStatus()%></span> <%
+ 							}
+ 							%>
 						</td>
 						<%-- 		<td><a class="btn btn-sm btn-danger" href="decline-leave?id=<%=c.getL_id()%>">Decline</a></td> --%>
 
@@ -226,12 +239,12 @@ color: blue;
 
 	</div>
 
-	 <div id="footer">
-        <div>
-            <p>ELM: Employee Leave Management</p>
-            <p>Created By: Tirtha Sahu</p>
-        </div>
-    </div>
+	<div id="footer">
+		<div>
+			<p>ELM: Employee Leave Management</p>
+			<p>Created By: Tirtha Sahu</p>
+		</div>
+	</div>
 
 	<%@include file="includes/footer.jsp"%>
 	<script

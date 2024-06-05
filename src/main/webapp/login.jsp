@@ -140,17 +140,6 @@ if (auth != null) {
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="js/main.js"></script>
 
-	<!-- //SWEET ALERT BY JS
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
-	<script type="text/javascript">
-	var status=document.getElementById("status").value;
-	if(status == "failed"){
-		swal("Sorry","Wrong username and password","error");
-	}
-	
-	</script> -->
-
 	<%@include file="includes/footer.jsp"%>
 </body>
 <!-- This templates was made by Colorlib (https://colorlib.com) -->

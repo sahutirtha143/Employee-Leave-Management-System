@@ -40,7 +40,7 @@ public class Users {
 	}
 	
 	
-
+//for user update
 	public Users(int id, String name, String email, String role, String department) {
 		super();
 		this.id = id;

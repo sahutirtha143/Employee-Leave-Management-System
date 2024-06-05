@@ -56,8 +56,6 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("Login unsucessfully");
 		}
 
-		
-
 			
 		} catch (Exception e) {
 			// TODO: handle exception

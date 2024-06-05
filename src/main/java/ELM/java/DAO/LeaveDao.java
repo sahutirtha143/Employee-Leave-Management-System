@@ -50,11 +50,9 @@ public class LeaveDao {
     	
     	try {
     		query=" select * from apply_leaves where u_id=? order by apply_leaves.l_id desc;";
-    		ps=connection.prepareStatement(query);
-    		
+    		ps=connection.prepareStatement(query);		
     		ps.setInt(1, id);
     		rs=ps.executeQuery();
-    		
     		while(rs.next()) {
     			ApplyLeave al=new ApplyLeave();
     			UserDao uDao=new UserDao();
@@ -90,7 +88,7 @@ public class LeaveDao {
 		}
 	}
     
-    //DYNAMICALLY DATA FETCH INTO THE admin_LeaveAuthorize.jsp PAGE Where all the users leave history is viewed
+    //DYNAMICALLY DATA FETCH INTO THE admin_LeaveAuthorize.jsp PAGE Where all the users leave history is viewed(ADMIN PAGE)
     public List<ApplyLeave> getAllLeaveRequests(){
     	List<ApplyLeave> leaveList = new ArrayList<>();
     	try {
@@ -122,7 +120,7 @@ public class LeaveDao {
     	return leaveList;
     }
     
-//    STATUS UPDATE Approved
+//    STATUS UPDATE Approved(ADMIN PAGE)
     public void updateStatusApproved(int l_id, String status) {
     	try {
     		query="UPDATE apply_leaves SET status = ? WHERE l_id = ?";
@@ -135,7 +133,7 @@ public class LeaveDao {
 			e.printStackTrace();
 		}
     }
-//  STATUS UPDATE declined
+//  STATUS UPDATE declined(ADMIN PAGE)
     public void updateStatusDeclined(int l_id, String status) {
     	try {
     		query="UPDATE apply_leaves SET status = ? WHERE l_id = ?";
@@ -149,42 +147,7 @@ public class LeaveDao {
 		}
     }
 //    COUNT TYPES OF LEAVES FOR PERTICULAR USER
-	/*
-	 * public Map<String, Integer> getLeaveCountByType(int userId) throws
-	 * SQLException { Map<String, Integer> leaveCount = new HashMap<>();
-	 * leaveCount.put("Sick Leave", 0); leaveCount.put("Vacation Leaves", 0);
-	 * leaveCount.put("Other Leaves", 0);
-	 * 
-	 * query="SELECT type_of_leave, COUNT(*) AS count FROM apply_leaves WHERE u_id = ? GROUP BY type_of_leave"
-	 * ; ps=this.connection.prepareStatement(query); ps.setInt(1, userId);
-	 * rs=ps.executeQuery();
-	 * 
-	 * while(rs.next()) { String leaveType=rs.getString("type_of_leaves"); int
-	 * count=rs.getInt("count"); leaveCount.put(leaveType, count); } return
-	 * leaveCount; }
-	 */
-    
-	/*
-	 * public List<ApplyLeave> getLeavesByUserId(int userId) throws SQLException {
-	 * List<ApplyLeave> leaves = new ArrayList<>(); query =
-	 * "SELECT * FROM apply_leaves WHERE u_id = ?";
-	 * ps=this.connection.prepareStatement(query); ps.setInt(1, userId);
-	 * rs=ps.executeQuery();
-	 * 
-	 * while(rs.next()) { ApplyLeave leave = new ApplyLeave(); UserDao uDao=new
-	 * UserDao(); int uId=rs.getInt("u_id");
-	 * 
-	 * leave.setL_id(rs.getInt("l_id")); leave.setId(uId);
-	 * leave.setStartDate(rs.getDate("start_date"));
-	 * leave.setEndDate(rs.getDate("end_date"));
-	 * leave.setType(rs.getString("type_of_leave"));
-	 * leave.setReason(rs.getString("reason"));
-	 * leave.setStatus(rs.getString("status")); leaves.add(leave); } return leaves;
-	 * } public int calculateLeaveDays(ApplyLeave leave) { long diffInMillies =
-	 * leave.getEndDate().getTime() - leave.getStartDate().getTime(); return (int)
-	 * (diffInMillies / (24 * 60 * 60 * 1000)); }
-	 */
-    
+
     public List<ApplyLeave> getLeavesByUserId(int userId) {
         List<ApplyLeave> leaves = new ArrayList<>();
         query = "SELECT * FROM apply_leaves WHERE u_id = ? AND status = 'Approved'";
@@ -213,7 +176,7 @@ public class LeaveDao {
         return leaves;
     }
 
-    
+//  LEAVE CALANDER
     public List<ApplyLeave> getAllApprovedLeaves() {
         List<ApplyLeave> leaves = new ArrayList<>();
         query = "SELECT * FROM apply_leaves WHERE status = 'Approved'";

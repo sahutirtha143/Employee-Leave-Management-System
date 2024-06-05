@@ -28,19 +28,6 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		 response.setContentType("text/html");
-//		 PrintWriter out=response.getWriter();
-//		 
-//		 String name = request.getParameter("name");
-//		 String email=request.getParameter("email");
-//		 String password=request.getParameter("pass");
-//		 String conPassword=request.getParameter("con_pass");
-//		 String contact=request.getParameter("contact");
-//		
-
-//			UserDao udao=new UserDao(DbCon.getConnection());
-//			Users employee=new Users();
-//			
 	
 	     String name = request.getParameter("name");
 		 String email=request.getParameter("email");
